@@ -27,7 +27,8 @@ type SessionAction =
   | { type: 'SET_SUMMARY'; summary: ShiftSummary }
   | { type: 'EDIT_SUMMARY_SECTION'; sectionId: string; content: string }
   | { type: 'FINALIZE_SUMMARY' }
-  | { type: 'SET_PROCESSING'; isProcessing: boolean };
+  | { type: 'SET_PROCESSING'; isProcessing: boolean }
+  | { type: 'RESET_SESSION' };
 
 // --- Initial state ---
 
@@ -146,6 +147,10 @@ function sessionReducer(
       };
     }
 
+    case 'RESET_SESSION': {
+      return initialState;
+    }
+
     default:
       return state;
   }
@@ -166,6 +171,7 @@ interface SessionContextValue {
   editSummarySection: (sectionId: string, content: string) => void;
   finalizeSummary: () => void;
   setProcessing: (isProcessing: boolean) => void;
+  resetSession: () => void;
 }
 
 const SessionContext = createContext<SessionContextValue | null>(null);
@@ -239,6 +245,10 @@ export function AppProvider({ children }: AppProviderProps) {
     [dispatch]
   );
 
+  const resetSession = useCallback(() => {
+    dispatch({ type: 'RESET_SESSION' });
+  }, [dispatch]);
+
   const value: SessionContextValue = {
     state,
     dispatch,
@@ -252,6 +262,7 @@ export function AppProvider({ children }: AppProviderProps) {
     editSummarySection,
     finalizeSummary,
     setProcessing,
+    resetSession,
   };
 
   return (

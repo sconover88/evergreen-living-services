@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { User, MapPin, Activity, AlertTriangle } from 'lucide-react';
 import { useSession } from '@/context/SessionContext';
 import mockAIService, { getRandomAcknowledgment } from '@/services/mockAIService';
+import { simulatedTranscriptions } from '@/data/simulated-transcriptions';
 import { Checklist } from './Checklist';
 import { ConversationPanel } from './ConversationPanel';
 import { AIQuestions } from './AIQuestions';
@@ -35,7 +36,52 @@ export function DocumentationSession() {
 
   const [followUpQuestions, setFollowUpQuestions] = useState<FollowUpQuestion[]>([]);
 
+  // --- Simulated voice transcription queue ---
+  const transcriptionIndexRef = useRef(0);
+  const [currentTranscription, setCurrentTranscription] = useState<string | null>(null);
+
   const { patient, checklist, messages, isProcessing, summary } = state;
+
+  /**
+   * Build a flat list of transcriptions for the current patient's conditions.
+   * Interleaves observations from all conditions so the user gets variety.
+   */
+  const getTranscriptionsForPatient = useCallback(() => {
+    if (!patient) return [];
+    const allTexts: string[] = [];
+    const conditionTexts = patient.conditions.map(
+      (c) => simulatedTranscriptions[c] ?? []
+    );
+    const maxLen = Math.max(...conditionTexts.map((t) => t.length), 0);
+    for (let i = 0; i < maxLen; i++) {
+      for (const texts of conditionTexts) {
+        if (i < texts.length) {
+          allTexts.push(texts[i]);
+        }
+      }
+    }
+    return allTexts;
+  }, [patient]);
+
+  /**
+   * Advance the transcription queue when a simulation is consumed.
+   */
+  const handleSimulationUsed = useCallback(() => {
+    transcriptionIndexRef.current += 1;
+    setCurrentTranscription(null);
+  }, []);
+
+  /**
+   * Compute the next transcription text to offer. Called lazily when needed.
+   */
+  const getNextTranscription = useCallback((): string | null => {
+    const queue = getTranscriptionsForPatient();
+    if (transcriptionIndexRef.current >= queue.length) return null;
+    return queue[transcriptionIndexRef.current];
+  }, [getTranscriptionsForPatient]);
+
+  // Provide the current transcription text (null if none left)
+  const simulatedText = currentTranscription ?? getNextTranscription();
 
   // --- Interaction flow: Nurse submits input ---
   const handleSubmitInput = useCallback(
@@ -206,28 +252,20 @@ export function DocumentationSession() {
         </div>
       </section>
 
-      {/* Section 2: Checklist */}
-      <section className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6 shadow-[0_2px_8px_0_rgba(79,70,229,0.06)]">
-        <Checklist
-          items={checklist}
-          onToggleItem={toggleChecklistItem}
-          completedCount={completedCount}
-          totalCount={totalCount}
-        />
-      </section>
-
-      {/* Section 3: Conversation Panel */}
+      {/* Section 2: Conversation Panel */}
       {state.phase === 'documentation' && (
         <section aria-label="Documentation conversation">
           <ConversationPanel
             messages={messages}
             onSubmitInput={handleSubmitInput}
             isProcessing={isProcessing}
+            simulatedText={simulatedText}
+            onSimulationUsed={handleSimulationUsed}
           />
         </section>
       )}
 
-      {/* Section 4: AI Follow-up Questions */}
+      {/* Section 3: AI Follow-up Questions */}
       {followUpQuestions.length > 0 && state.phase === 'documentation' && (
         <section className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6 shadow-[0_2px_8px_0_rgba(79,70,229,0.06)]">
           <AIQuestions
@@ -236,6 +274,16 @@ export function DocumentationSession() {
           />
         </section>
       )}
+
+      {/* Section 4: Checklist */}
+      <section className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6 shadow-[0_2px_8px_0_rgba(79,70,229,0.06)]">
+        <Checklist
+          items={checklist}
+          onToggleItem={toggleChecklistItem}
+          completedCount={completedCount}
+          totalCount={totalCount}
+        />
+      </section>
 
       {/* Section 5: Generate Summary Button */}
       {state.phase === 'documentation' && (

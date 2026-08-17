@@ -1,27 +1,100 @@
-import { useState, useRef, useCallback, type KeyboardEvent } from 'react';
+import { useState, useRef, useCallback, useEffect, type KeyboardEvent } from 'react';
 import { Mic, Send } from 'lucide-react';
 
 interface ConversationInputProps {
   onSubmit: (text: string) => void;
   disabled: boolean;
   placeholder?: string;
+  /** If provided, clicking the textarea when empty triggers a character-by-character transcription simulation. */
+  simulatedText?: string | null;
+  /** Called when the simulation has been consumed (finished typing or started). */
+  onSimulationUsed?: () => void;
 }
 
 /**
  * ConversationInput provides a textarea styled as a voice transcription input.
  * Supports Enter to submit (Shift+Enter for newlines), disables when empty
  * or during AI processing. Styled with Corporate Trust design tokens.
+ *
+ * When `simulatedText` is provided and the textarea is empty, clicking/focusing
+ * the input triggers a live transcription simulation — text appears character
+ * by character with natural pauses at punctuation.
  */
 export function ConversationInput({
   onSubmit,
   disabled,
   placeholder = 'Type your observations here...',
+  simulatedText = null,
+  onSimulationUsed,
 }: ConversationInputProps) {
   const [value, setValue] = useState('');
+  const [isTranscribing, setIsTranscribing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const charIndexRef = useRef(0);
+  const simulationActiveRef = useRef(false);
 
   const trimmed = value.trim();
-  const isSubmitDisabled = disabled || trimmed.length === 0;
+  const isSubmitDisabled = disabled || trimmed.length === 0 || isTranscribing;
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearTimeout(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, []);
+
+  const getCharDelay = (char: string): number => {
+    if (char === '.') return 300;
+    if (char === ',') return 150;
+    if (char === ' ') return 70;
+    // Standard character delay: ~50ms for natural pace
+    return 50;
+  };
+
+  const startTranscription = useCallback(() => {
+    if (!simulatedText || simulationActiveRef.current) return;
+
+    simulationActiveRef.current = true;
+    setIsTranscribing(true);
+    charIndexRef.current = 0;
+
+    const typeNextChar = () => {
+      if (charIndexRef.current >= simulatedText.length) {
+        // Done transcribing — notify parent that transcription was consumed
+        setIsTranscribing(false);
+        simulationActiveRef.current = false;
+        intervalRef.current = null;
+        onSimulationUsed?.();
+        return;
+      }
+
+      const currentChar = simulatedText[charIndexRef.current];
+      charIndexRef.current += 1;
+
+      setValue(simulatedText.slice(0, charIndexRef.current));
+
+      const delay = getCharDelay(currentChar);
+      intervalRef.current = setTimeout(typeNextChar, delay);
+    };
+
+    // Small initial delay before typing starts
+    intervalRef.current = setTimeout(typeNextChar, 200);
+  }, [simulatedText, onSimulationUsed]);
+
+  const handleFocus = useCallback(() => {
+    // No-op: simulation is triggered by explicit click, not focus alone
+  }, []);
+
+  const handleClick = useCallback(() => {
+    // Only start simulation if: there's text to simulate, textarea is empty, and not already transcribing
+    if (simulatedText && value === '' && !isTranscribing && !simulationActiveRef.current && !disabled) {
+      startTranscription();
+    }
+  }, [simulatedText, value, isTranscribing, disabled, startTranscription]);
 
   const handleSubmit = useCallback(() => {
     if (isSubmitDisabled) return;
@@ -51,6 +124,19 @@ export function ConversationInput({
         </span>
       </label>
 
+      {/* Recording indicator */}
+      {isTranscribing && (
+        <div
+          className="flex items-center gap-2 mb-2"
+          role="status"
+          aria-live="polite"
+          aria-label="Voice transcription in progress"
+        >
+          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" aria-hidden="true" />
+          <span className="text-xs text-slate-500">Transcribing...</span>
+        </div>
+      )}
+
       {/* Input container */}
       <div
         className={[
@@ -66,8 +152,26 @@ export function ConversationInput({
           ref={textareaRef}
           id="conversation-input"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            const newVal = e.target.value;
+            // If user types manually during a simulation, stop the simulation
+            if (simulationActiveRef.current && simulatedText) {
+              const expectedSoFar = simulatedText.slice(0, charIndexRef.current);
+              if (newVal !== expectedSoFar && newVal !== simulatedText.slice(0, charIndexRef.current + 1)) {
+                // User is typing something different — abort simulation
+                if (intervalRef.current) {
+                  clearTimeout(intervalRef.current);
+                  intervalRef.current = null;
+                }
+                setIsTranscribing(false);
+                simulationActiveRef.current = false;
+              }
+            }
+            setValue(newVal);
+          }}
           onKeyDown={handleKeyDown}
+          onFocus={handleFocus}
+          onClick={handleClick}
           disabled={disabled}
           placeholder={placeholder}
           rows={2}

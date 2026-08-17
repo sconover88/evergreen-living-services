@@ -8,6 +8,10 @@ interface ConversationPanelProps {
   messages: ConversationMessage[];
   onSubmitInput: (text: string) => void;
   isProcessing: boolean;
+  /** Text to simulate as voice transcription in the input. */
+  simulatedText?: string | null;
+  /** Called when the simulated transcription is consumed. */
+  onSimulationUsed?: () => void;
 }
 
 /**
@@ -19,6 +23,8 @@ export function ConversationPanel({
   messages,
   onSubmitInput,
   isProcessing,
+  simulatedText = null,
+  onSimulationUsed,
 }: ConversationPanelProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +79,7 @@ export function ConversationPanel({
 
       {/* Input area */}
       <div className="border-t border-slate-200 bg-white p-3 sm:p-4">
-        <ConversationInput onSubmit={onSubmitInput} disabled={isProcessing} />
+        <ConversationInput onSubmit={onSubmitInput} disabled={isProcessing} simulatedText={simulatedText} onSimulationUsed={onSimulationUsed} />
       </div>
     </section>
   );
