@@ -1,5 +1,18 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "2.3 Write property tests for checklist state logic": {
+      "status": "passed",
+      "lastRunTimestamp": 1787003591158
+    },
+    "7.3 Write property tests for summary generation": {
+      "status": "passed",
+      "lastRunTimestamp": 1787003631257
+    },
+    "2.4 Write property tests for mock AI service": {
+      "status": "passed",
+      "lastRunTimestamp": 1787003698268
+    }
+  },
   "executionHistory": {
     "1.1 Initialize Vite + React + TypeScript project with Tailwind CSS, shadcn/ui, and Plus Jakarta Sans font": [
       {
@@ -11,6 +24,11 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001521371
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787001996785
       }
     ],
     "1.2 Define TypeScript interfaces and types": [
@@ -18,6 +36,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001513907
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002001187
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002172554
       }
     ],
     "1.3 Create mock data files": [
@@ -25,6 +53,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001513928
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002002690
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002173449
       }
     ],
     "2.1 Implement session state context with useReducer": [
@@ -32,6 +70,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001513967
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002177767
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002427828
       }
     ],
     "2.2 Implement mock AI service module": [
@@ -39,6 +87,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001513989
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002178586
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002428728
       }
     ],
     "3. Checkpoint - Core logic verification": [
@@ -46,6 +104,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514009
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002587271
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002596406
       }
     ],
     "4.1 Create PatientList component": [
@@ -53,6 +121,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514028
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002437991
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002574177
       }
     ],
     "4.2 Create App shell and Header component": [
@@ -60,6 +138,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514051
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002438095
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002575084
       }
     ],
     "5.1 Create Checklist component": [
@@ -67,6 +155,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514076
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002613088
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002714966
       }
     ],
     "6.1 Create ConversationInput component": [
@@ -74,6 +172,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514098
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002613927
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002714105
       }
     ],
     "6.2 Create MessageBubble and ConversationPanel components": [
@@ -81,6 +189,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514128
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002719079
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002845610
       }
     ],
     "6.3 Create AIQuestions component": [
@@ -88,6 +206,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514150
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002720076
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002846370
       }
     ],
     "7.1 Create SummaryEditor component": [
@@ -95,6 +223,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514175
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002850915
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002974933
       }
     ],
     "7.2 Wire summary generation into documentation flow": [
@@ -102,6 +240,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514217
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002852015
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002976072
       }
     ],
     "8. Checkpoint - Full flow verification": [
@@ -109,6 +257,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514241
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002981213
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002993293
       }
     ],
     "9.1 Create DocumentationSession component": [
@@ -116,6 +274,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514263
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002997683
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003154352
       }
     ],
     "9.2 Implement full interaction flow wiring": [
@@ -123,6 +291,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514283
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002998528
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003155307
       }
     ],
     "10.1 Implement accessibility compliance": [
@@ -130,6 +308,16 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514303
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003159716
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003427893
       }
     ],
     "11. Final checkpoint - Complete app verification": [
@@ -137,6 +325,140 @@
         "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
         "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
         "timestamp": 1787001514329
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003431961
+      },
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003441746
+      }
+    ],
+    "1. Set up project structure, dependencies, and core types": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002173472
+      }
+    ],
+    "2. Implement state management and mock AI service": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002428761
+      }
+    ],
+    "4. Implement patient selection UI": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002575111
+      }
+    ],
+    "5. Implement checklist UI": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002714999
+      }
+    ],
+    "6. Implement conversation interface": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002846398
+      }
+    ],
+    "7. Implement summary generation and editing": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787002976106
+      }
+    ],
+    "9. Wire full documentation session together": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003155333
+      }
+    ],
+    "10. Accessibility and polish": [
+      {
+        "executionId": "9f1ab48b-38af-42ab-8049-ad8bb776109b",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003427960
+      }
+    ],
+    "2.3 Write property tests for checklist state logic": [
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003484810
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003491517
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003797055
+      }
+    ],
+    "2.4 Write property tests for mock AI service": [
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003485654
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003492398
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003797881
+      }
+    ],
+    "7.3 Write property tests for summary generation": [
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003486447
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003493162
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003798802
+      }
+    ],
+    "10.2 Write integration tests for full documentation flow": [
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003487358
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003494059
+      },
+      {
+        "executionId": "ad3db092-022e-4d4c-998a-17e6b27ccf4c",
+        "chatSessionId": "sess_178b656a-4e51-4bda-af8b-ba274e256143",
+        "timestamp": 1787003800409
       }
     ]
   }
