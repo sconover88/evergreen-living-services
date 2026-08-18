@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
-import { User, MapPin, Activity, AlertTriangle } from 'lucide-react';
+import { User, MapPin, Activity, AlertTriangle, ClipboardList } from 'lucide-react';
 import { useSession } from '@/context/SessionContext';
 import mockAIService, { getRandomAcknowledgment } from '@/services/mockAIService';
 import { simulatedTranscriptions } from '@/data/simulated-transcriptions';
@@ -26,12 +26,15 @@ export function DocumentationSession() {
   const {
     state,
     toggleChecklistItem,
+    addChecklistItem,
+    updateChecklistResult,
     addMessage,
     addNotes,
     autoCheckItems,
     editSummarySection,
     finalizeSummary,
     setProcessing,
+    setNurseRecommendations,
   } = useSession();
 
   const [followUpQuestions, setFollowUpQuestions] = useState<FollowUpQuestion[]>([]);
@@ -280,19 +283,46 @@ export function DocumentationSession() {
         <Checklist
           items={checklist}
           onToggleItem={toggleChecklistItem}
+          onAddItem={addChecklistItem}
+          onUpdateResult={updateChecklistResult}
+          patientConditions={patient.conditions}
+          patientId={patient.id}
           completedCount={completedCount}
           totalCount={totalCount}
         />
       </section>
 
-      {/* Section 5: Generate Summary Button */}
+      {/* Section 5: Nurse Recommendations */}
+      {state.phase === 'documentation' && (
+        <section className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6 shadow-[0_2px_8px_0_rgba(79,70,229,0.06)]">
+          <div className="flex items-center gap-2.5 mb-3">
+            <ClipboardList className="w-5 h-5 text-indigo-600" aria-hidden="true" />
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Recommendations for Next Shift
+            </h2>
+          </div>
+          <p className="text-xs text-slate-500 mb-3">
+            Add any notes or recommendations for the incoming nurse.
+          </p>
+          <textarea
+            value={state.nurseRecommendations}
+            onChange={(e) => setNurseRecommendations(e.target.value)}
+            placeholder="e.g., Monitor blood pressure closely, patient complained of dizziness at 2 PM, follow up on lab results..."
+            rows={4}
+            className="w-full border border-slate-200 rounded-lg p-3 text-sm text-slate-900 placeholder-slate-400 resize-y min-h-[100px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            aria-label="Recommendations for next shift"
+          />
+        </section>
+      )}
+
+      {/* Section 6: Generate Summary Button */}
       {state.phase === 'documentation' && (
         <section aria-label="Summary generation">
           <GenerateSummaryButton />
         </section>
       )}
 
-      {/* Section 6: Summary Editor */}
+      {/* Section 7: Summary Editor */}
       {state.phase === 'summary' && summary && (
         <section
           className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6 shadow-[0_2px_8px_0_rgba(79,70,229,0.06)]"

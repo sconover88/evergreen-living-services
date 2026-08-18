@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import type {
+  ChecklistItem,
   ConversationMessage,
   DocumentationSessionState,
   Patient,
@@ -21,6 +22,8 @@ import { mockPatients } from '@/data/patients';
 type SessionAction =
   | { type: 'SELECT_PATIENT'; patientId: string }
   | { type: 'TOGGLE_CHECKLIST_ITEM'; itemId: string }
+  | { type: 'ADD_CHECKLIST_ITEM'; item: ChecklistItem }
+  | { type: 'UPDATE_CHECKLIST_RESULT'; itemId: string; result: string }
   | { type: 'ADD_MESSAGE'; message: ConversationMessage }
   | { type: 'ADD_NOTES'; notes: StructuredNote[] }
   | { type: 'AUTO_CHECK_ITEMS'; itemIds: string[] }
@@ -28,6 +31,7 @@ type SessionAction =
   | { type: 'EDIT_SUMMARY_SECTION'; sectionId: string; content: string }
   | { type: 'FINALIZE_SUMMARY' }
   | { type: 'SET_PROCESSING'; isProcessing: boolean }
+  | { type: 'SET_NURSE_RECOMMENDATIONS'; text: string }
   | { type: 'RESET_SESSION' };
 
 // --- Initial state ---
@@ -40,6 +44,7 @@ const initialState: DocumentationSessionState = {
   summary: null,
   isProcessing: false,
   phase: 'patient-selection',
+  nurseRecommendations: '',
 };
 
 // --- Reducer ---
@@ -73,6 +78,24 @@ function sessionReducer(
                 isChecked: !item.isChecked,
                 checkedAt: !item.isChecked ? Date.now() : undefined,
               }
+            : item
+        ),
+      };
+    }
+
+    case 'ADD_CHECKLIST_ITEM': {
+      return {
+        ...state,
+        checklist: [...state.checklist, action.item],
+      };
+    }
+
+    case 'UPDATE_CHECKLIST_RESULT': {
+      return {
+        ...state,
+        checklist: state.checklist.map((item) =>
+          item.id === action.itemId
+            ? { ...item, result: action.result }
             : item
         ),
       };
@@ -147,6 +170,13 @@ function sessionReducer(
       };
     }
 
+    case 'SET_NURSE_RECOMMENDATIONS': {
+      return {
+        ...state,
+        nurseRecommendations: action.text,
+      };
+    }
+
     case 'RESET_SESSION': {
       return initialState;
     }
@@ -164,6 +194,8 @@ interface SessionContextValue {
   patients: Patient[];
   selectPatient: (patientId: string) => void;
   toggleChecklistItem: (itemId: string) => void;
+  addChecklistItem: (item: ChecklistItem) => void;
+  updateChecklistResult: (itemId: string, result: string) => void;
   addMessage: (message: ConversationMessage) => void;
   addNotes: (notes: StructuredNote[]) => void;
   autoCheckItems: (itemIds: string[]) => void;
@@ -171,6 +203,7 @@ interface SessionContextValue {
   editSummarySection: (sectionId: string, content: string) => void;
   finalizeSummary: () => void;
   setProcessing: (isProcessing: boolean) => void;
+  setNurseRecommendations: (text: string) => void;
   resetSession: () => void;
 }
 
@@ -195,6 +228,20 @@ export function AppProvider({ children }: AppProviderProps) {
   const toggleChecklistItem = useCallback(
     (itemId: string) => {
       dispatch({ type: 'TOGGLE_CHECKLIST_ITEM', itemId });
+    },
+    [dispatch]
+  );
+
+  const addChecklistItem = useCallback(
+    (item: ChecklistItem) => {
+      dispatch({ type: 'ADD_CHECKLIST_ITEM', item });
+    },
+    [dispatch]
+  );
+
+  const updateChecklistResult = useCallback(
+    (itemId: string, result: string) => {
+      dispatch({ type: 'UPDATE_CHECKLIST_RESULT', itemId, result });
     },
     [dispatch]
   );
@@ -245,6 +292,13 @@ export function AppProvider({ children }: AppProviderProps) {
     [dispatch]
   );
 
+  const setNurseRecommendations = useCallback(
+    (text: string) => {
+      dispatch({ type: 'SET_NURSE_RECOMMENDATIONS', text });
+    },
+    [dispatch]
+  );
+
   const resetSession = useCallback(() => {
     dispatch({ type: 'RESET_SESSION' });
   }, [dispatch]);
@@ -255,6 +309,8 @@ export function AppProvider({ children }: AppProviderProps) {
     patients: mockPatients,
     selectPatient,
     toggleChecklistItem,
+    addChecklistItem,
+    updateChecklistResult,
     addMessage,
     addNotes,
     autoCheckItems,
@@ -262,6 +318,7 @@ export function AppProvider({ children }: AppProviderProps) {
     editSummarySection,
     finalizeSummary,
     setProcessing,
+    setNurseRecommendations,
     resetSession,
   };
 
