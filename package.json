@@ -8,9 +8,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:update": "npm run build && aws s3 sync dist/ s3://kc-evergreen-nursing-notes-demo --delete --exclude \"index.html\" --cache-control \"public,max-age=31536000,immutable\" && aws s3 cp dist/index.html s3://kc-evergreen-nursing-notes-demo/index.html --cache-control \"no-cache,no-store,must-revalidate\""
   },
   "dependencies": {
+    "@aws-sdk/client-transcribe-streaming": "^3.1112.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.972.68",
     "@base-ui/react": "^1.7.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -36,6 +40,7 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.1",
+    "vite-plugin-node-polyfills": "^0.28.0",
     "vitest": "^4.1.10",
     "vitest-axe": "^0.1.0"
   }
