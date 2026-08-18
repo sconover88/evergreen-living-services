@@ -20,6 +20,7 @@ export interface ChecklistItem {
   isChecked: boolean;
   checkedAt?: number;
   notes?: string;
+  result?: string;
 }
 
 export interface ConversationMessage {
@@ -70,4 +71,5 @@ export interface DocumentationSessionState {
   summary: ShiftSummary | null;
   isProcessing: boolean;
   phase: 'patient-selection' | 'documentation' | 'summary';
+  nurseRecommendations: string;
 }

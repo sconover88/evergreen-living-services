@@ -9,7 +9,7 @@ import type { ChecklistItem } from '@/types';
  * and must be populated when generating a patient-specific checklist.
  */
 
-interface ChecklistTemplate {
+export interface ChecklistTemplate {
   id: string;
   category: string;
   label: string;
@@ -195,4 +195,29 @@ export function buildChecklistForPatient(patientId: string, conditions: string[]
   }
 
   return items;
+}
+
+
+/**
+ * Returns all checklist templates for a given category, filtered by patient conditions.
+ * Used to populate the "Add" dropdown in each category section.
+ */
+export function getTemplatesForCategory(conditions: string[], category: string): ChecklistTemplate[] {
+  const templates: ChecklistTemplate[] = [];
+
+  for (const condition of conditions) {
+    const conditionTemplates = checklistTemplates[condition];
+    if (!conditionTemplates) continue;
+
+    for (const template of conditionTemplates) {
+      if (template.category === category) {
+        // Avoid duplicates (same id already added from another condition)
+        if (!templates.some((t) => t.id === template.id)) {
+          templates.push(template);
+        }
+      }
+    }
+  }
+
+  return templates;
 }
