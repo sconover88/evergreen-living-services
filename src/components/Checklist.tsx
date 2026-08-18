@@ -270,15 +270,18 @@ function ChecklistItemCard({ item, onToggle, onUpdateResult }: ChecklistItemCard
         }
       `}
     >
-      {/* Status indicator */}
-      <div className="flex-shrink-0 mt-0.5 min-w-[24px] flex items-start justify-center pt-0.5">
-        {item.isChecked ? (
-          <span className="flex items-center justify-center w-6 h-6 rounded-md bg-indigo-600 border-2 border-indigo-600">
-            <Check className="w-4 h-4 text-white" aria-hidden="true" />
-          </span>
-        ) : (
-          <span className="w-6 h-6 rounded-md border-2 border-dashed border-slate-300" aria-hidden="true" />
-        )}
+      {/* Status indicator — rectangle always visible, checkmark appears on completion */}
+      <div className="flex-shrink-0 mt-0.5">
+        <span
+          className={`flex items-center justify-center w-6 h-6 rounded-md border-2 transition-colors duration-200 ${
+            item.isChecked
+              ? 'bg-indigo-600 border-indigo-600'
+              : 'border-slate-300 bg-white'
+          }`}
+          aria-hidden="true"
+        >
+          {item.isChecked && <Check className="w-4 h-4 text-white" />}
+        </span>
       </div>
 
       {/* Item content */}
